@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
-import { Space, Table, Tag, Button, Input } from "antd";
-import PropTypes from "prop-types";
+import { Space, Table, Tag, Button } from "antd";
+// import PropTypes from "prop-types";
 
 export class User extends Component {
   static propTypes = {};

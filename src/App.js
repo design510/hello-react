@@ -7,13 +7,16 @@ import Container from "./components/TodoList/Container";
 import HelloToOne from "./components/FuncComponent";
 import Login from "./pages/Login"
 import User from "./pages/User"
-import EditableTable from "./pages/User/testTable"
+import EditableTable from "./pages/User/EditableTable.tsx"
 
 export default class App extends Component {
+  saveDataFunc = (data) => {
+    console.log(data)
+  }
   render() {
     return (
       <div className="App">
-        <EditableTable></EditableTable>
+        <EditableTable saveDataFunc={this.saveDataFunc}></EditableTable>
         <User></User>
         <Login></Login>
         <HelloToOne></HelloToOne>
