@@ -34,53 +34,8 @@ const EditableCell = ({
     </td>
   );
 };
-const dataSource = [
-  {
-    key: "1",
-    name: "胡彦斌",
-    age: 32,
-    address: "西湖区湖底公园1号",
-  },
-];
 
 const EditableTable = () => {
-  const [form] = Form.useForm();
-  const [data, setData] = useState(dataSource);
-  const [editingKey, setEditingKey] = useState("");
-
-  const isEditing = (record) => record.key === editingKey;
-
-  const edit = (record) => {
-    form.setFieldsValue({ ...record });
-    setEditingKey(record.key);
-  };
-
-  const cancel = () => {
-    setEditingKey("");
-  };
-
-  const save = async (key) => {
-    try {
-      const row = await form.validateFields();
-      const newData = [...data];
-      const index = newData.findIndex((item) => key === item.key);
-
-      if (index > -1) {
-        const item = newData[index];
-        newData.splice(index, 1, { ...item, ...row });
-        setData(newData);
-        setEditingKey("");
-      } else {
-        newData.push(row);
-        setData(newData);
-        setEditingKey("");
-      }
-      console.log(newData)
-    } catch (errInfo) {
-      console.log("Save failed:", errInfo);
-    }
-  };
-
   const columns = [
     {
       title: "Name",
@@ -108,7 +63,7 @@ const EditableTable = () => {
             <a href="###" onClick={() => save(record.key)}>
               保存
             </a>
-            <a href="###" onClick={cancel} style={{marginLeft: '12px'}}>
+            <a href="###" onClick={cancel} style={{ marginLeft: "12px" }}>
               取消
             </a>
           </span>
@@ -141,6 +96,61 @@ const EditableTable = () => {
       }),
     };
   });
+
+  const dataSource = [
+    {
+      key: "1",
+      name: "胡彦斌",
+      age: 32,
+      address: "西湖区湖底公园1号",
+    },
+    {
+      key: "2",
+      name: "胡彦斌22",
+      age: 33,
+      address: "西湖区湖底公园1号22",
+    },
+  ];
+
+  const [form] = Form.useForm();
+  const [data, setData] = useState(dataSource);
+  const [editingKey, setEditingKey] = useState("");
+
+  const isEditing = (record) => record.key === editingKey;
+
+  const edit = (record) => {
+    console.log(record);
+    form.setFieldsValue({ ...record });
+    setEditingKey(record.key);
+  };
+
+  const cancel = () => {
+    setEditingKey("");
+  };
+
+  const save = async (key) => {
+    try {
+      const row = await form.validateFields();
+      console.log('row==', row)
+      console.log('data==', data)
+      const newData = [...data];
+      const index = newData.findIndex((item) => key === item.key);
+
+      if (index > -1) {
+        const item = newData[index];
+        newData.splice(index, 1, { ...item, ...row });
+        setData(newData);
+        setEditingKey("");
+      } else {
+        newData.push(row);
+        setData(newData);
+        setEditingKey("");
+      }
+      console.log(newData);
+    } catch (errInfo) {
+      console.log("Save failed:", errInfo);
+    }
+  };
 
   return (
     <Form form={form} component={false}>
