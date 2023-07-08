@@ -75,6 +75,7 @@ const EditableTable = () => {
         setData(newData);
         setEditingKey("");
       }
+      console.log(newData)
     } catch (errInfo) {
       console.log("Save failed:", errInfo);
     }
@@ -105,10 +106,10 @@ const EditableTable = () => {
         return editable ? (
           <span>
             <a href="###" onClick={() => save(record.key)}>
-              Save
+              保存
             </a>
-            <a href="###" onClick={cancel}>
-              Cancel
+            <a href="###" onClick={cancel} style={{marginLeft: '12px'}}>
+              取消
             </a>
           </span>
         ) : (
@@ -117,7 +118,7 @@ const EditableTable = () => {
             disabled={editingKey !== ""}
             onClick={() => edit(record)}
           >
-            Edit
+            编辑
           </a>
         );
       },
